@@ -65,7 +65,7 @@ static PyObject* ERS(PyObject* self, PyObject* args) {
     // Output
     pListLabel = PyList_New(height*width);
     for(int i = 0; i < height*width; ++i) {
-        pItem = PyInt_FromLong(label[i]);
+        pItem = PyLong_FromLong(label[i]);
         PyList_SetItem(pListLabel, i, pItem);
     }
 
@@ -130,7 +130,7 @@ static PyObject* ERSWgtOnly(PyObject* self, PyObject* args) {
     // Output
     pListLabel = PyList_New(height*width);
     for(int i = 0; i < height*width; ++i) {
-        pItem = PyInt_FromLong(label[i]);
+        pItem = PyLong_FromLong(label[i]);
         PyList_SetItem(pListLabel, i, pItem);
     }
 
@@ -156,6 +156,11 @@ static PyMethodDef ERSMethods[] = {
     {NULL, NULL, 0, NULL}
 };
 
-PyMODINIT_FUNC initERSModule(void) {
-    (void)Py_InitModule("ERSModule", ERSMethods);
-}
+static struct PyModuleDef initERSModule = {
+    PyModuleDef_HEAD_INIT,
+    "ERSModule",   /* name of module */
+    NULL, /* module documentation, may be NULL */
+    -1,       /* size of per-interpreter state of the module,
+                 or -1 if the module keeps state in global variables. */
+    ERSMethods
+};
