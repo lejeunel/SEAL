@@ -164,3 +164,13 @@ static struct PyModuleDef initERSModule = {
                  or -1 if the module keeps state in global variables. */
     ERSMethods
 };
+
+#if PY_MAJOR_VERSION >= 3
+PyMODINIT_FUNC PyInit_ERSModule(void) {
+     return PyModule_Create(&initERSModule);
+}
+#else
+PyMODINIT_FUNC initERSModule(void) {
+    (void)Py_InitModule("ERSModule", ERSMethods);
+}
+#endif

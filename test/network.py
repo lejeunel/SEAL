@@ -51,7 +51,7 @@ class PixelAffinityNet(nn.Module):
 
         self.use_canny = use_canny
         if self.use_canny:
-            print('use_canny = True')
+            #print('use_canny = True')
             self.conv6 = nn.Conv2d(2, 8, kernel_size=1, stride=1, bias=True)
             self.in6 = nn.InstanceNorm2d(8, affine=False, track_running_stats=True)
             self.relu6 = nn.ReLU()
